@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  mongodb:
+    image: "mongo:6.0.4-jammy"
+    container_name: scanner-db
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=root
+    #   - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+    ports:
+      - "27017:27017"
+    networks:
+      - mynet
+
+  backend:
+    build: .
+    container_name: email-scanner
+    volumes:
+      - .:/app  
+    ports:
+      - "9000:9000"
+    depends_on:
+      - mongodb
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    driver: bridge
