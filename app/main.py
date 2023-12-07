@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.services.database import init_db
 from app.routers import userRouter
-from app.routers import scan
+from app.routers import scanRouter
 app = FastAPI()
 
 app.add_middleware(
@@ -23,4 +23,4 @@ async def home():
 
 
 app.include_router(userRouter.router, prefix="/api/users")
-app.include_router(scan.router, prefix="/api/scan")
+app.include_router(scanRouter.router, prefix="/api/scan")

@@ -1,4 +1,10 @@
 FROM python:3-slim-buster
+# ENV TZ=Asia/Karachi
+RUN apt update
+
+RUN apt install clamav -y
+
+RUN freshclam
 
 WORKDIR /app
 

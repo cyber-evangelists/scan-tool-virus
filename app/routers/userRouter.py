@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 
 from app.models.db_models.user import User
 from app.models.request_models.signUpRequest import CreateUserRequest
-from app.models.request_models.loginrequest import LoginUserRequest
+from app.models.request_models.loginRequest import LoginUserRequest
 from app.auth.auth_handler import signJWT
 from app.services.logs import logger
 from app.services.utils import hash_password, verify_password

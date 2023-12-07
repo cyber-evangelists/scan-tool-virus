@@ -6,6 +6,7 @@ from time import sleep
 from pprint import pprint
 from app.constants.config import vt_api_key
 from app.services.logs import logger
+import subprocess
 
 class VirusTotal_API:
     def __init__(self, apiKey):
@@ -52,15 +53,31 @@ class VirusTotal_API:
                 positives.append(engine)
         return positives
 
+def scan_file(file_path):
+    try:
+        result = subprocess.run(['clamscan', file_path], stdout=subprocess.PIPE, text=True)
+        while result.returncode is None:
+            result = subprocess.run(['clamscan', file_path], stdout=subprocess.PIPE, text=True)
+        output = result.stdout
+        scan_dict = {}
+        for line in output.strip().split('\n')[:-2]:  # Excluding last two lines
+            if ': ' in line:  # Check if the line contains the separator
+                if ": OK" in line or "Start Date:" in line or "End Date:" in line or "/" in line:
+                    continue
+                key, value = line.split(': ', 1)
+                scan_dict[key] = value
+        return scan_dict
+    except Exception as e:
+        return {"error occur while scan": str(e)}
+    
 def virus_scan(original_file_name, filePath):
     api = VirusTotal_API(vt_api_key)
     logger.info(f"Initiating scan for: {original_file_name}")
     resourceId = api.uploadFile(filePath)
     positives = api.retrieveReport(resourceId)
-
-    alerts = {"alerts": len(positives)}
-    report = {"filename": original_file_name, "alerts": len(positives), "report": api.report}
-    return report
-
-
-# pprint(virus_scan("test_mail.eml"))
+    scan_report = api.report
+    # logger.info(f"Initiating other scan for: {original_file_name}")
+    # other_scan = scan_file(filePath)
+    # scan_report['other_scan'] = other_scan
+    logger.info("scan completed")
+    return scan_report
