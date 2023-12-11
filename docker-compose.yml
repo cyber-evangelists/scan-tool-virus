@@ -16,7 +16,7 @@ services:
 
   backend:
     build: .
-    container_name: email-scanner
+    container_name: scanner-be
     volumes:
       - .:/app  
     ports:

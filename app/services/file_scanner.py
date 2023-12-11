@@ -70,14 +70,14 @@ def scan_file(file_path):
     except Exception as e:
         return {"error occur while scan": str(e)}
     
-def virus_scan(original_file_name, filePath):
+def file_scan(original_file_name, filePath):
     api = VirusTotal_API(vt_api_key)
-    logger.info(f"Initiating scan for: {original_file_name}")
+    logger.info(f"Initiating file scan for: {original_file_name}")
     resourceId = api.uploadFile(filePath)
     positives = api.retrieveReport(resourceId)
     scan_report = api.report
     # logger.info(f"Initiating other scan for: {original_file_name}")
     # other_scan = scan_file(filePath)
     # scan_report['other_scan'] = other_scan
-    logger.info("scan completed")
+    logger.info(f"File scan completed for: {original_file_name}")
     return scan_report

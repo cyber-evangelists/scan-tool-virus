@@ -8,4 +8,4 @@ class User(Document):
     email: str
 
     class Settings:
-        name = "users"
+        name = "Users"
