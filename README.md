@@ -14,7 +14,7 @@ This project is a web backend built using Python and FastAPI, featuring RESTful 
 ## Getting Started
 
 ### Prerequisites
-- Docker
+- Docker Desktop Application
 - Docker Compose
 
 ### Installation
