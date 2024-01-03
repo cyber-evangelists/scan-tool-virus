@@ -7,6 +7,11 @@ services:
     # environment:
     #   - MONGO_INITDB_ROOT_USERNAME=root
     #   - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+<<<<<<< HEAD
+=======
+    # environment:
+    #   - TZ=Asia/Karachi
+>>>>>>> c18931cd379c94ab8ef653a2d07b3d6f15040e9e
     ports:
       - "27017:27017"
     networks:
@@ -14,7 +19,11 @@ services:
 
   backend:
     build: .
+<<<<<<< HEAD
     container_name: email-scanner
+=======
+    container_name: scanner-be
+>>>>>>> c18931cd379c94ab8ef653a2d07b3d6f15040e9e
     volumes:
       - .:/app  
     ports:

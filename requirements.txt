@@ -1,4 +1,13 @@
 fastapi==0.104.1
 uvicorn==0.24.0.post1
 beanie==1.23.6
+<<<<<<< HEAD
 python-dotenv==1.0.0
+=======
+python-dotenv==1.0.0
+PyJWT==2.6.0
+passlib==1.7.4
+bcrypt==4.0.0
+requests==2.31.0
+python-multipart==0.0.6
+>>>>>>> c18931cd379c94ab8ef653a2d07b3d6f15040e9e
