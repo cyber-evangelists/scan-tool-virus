@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 from fastapi import APIRouter, Depends, HTTPException, Response, status, Request
 from app.models.db_models.user import User
 from app.models.request_models.signUpRequest import CreateUserRequest
-=======
+
 from fastapi import APIRouter, HTTPException
 
 from app.models.db_models.user import User
@@ -11,15 +11,15 @@ from app.models.request_models.loginRequest import LoginUserRequest
 from app.auth.auth_handler import signJWT
 from app.services.logs import logger
 from app.services.utils import hash_password, verify_password
->>>>>>> c18931cd379c94ab8ef653a2d07b3d6f15040e9e
+
 
 router = APIRouter()
 
 @router.post("/signup", tags=["USER ROUTES"])
 async def signup_user(user: CreateUserRequest):
-<<<<<<< HEAD
+
     return user
-=======
+
     user.password = hash_password(user.password)
     check_user = await User.find_one({"username": user.username})
     if check_user:
@@ -45,4 +45,4 @@ async def login_user(user: LoginUserRequest):
         raise HTTPException(status_code=401, detail="Invalid password")
     token = signJWT(user.username)
     return token
->>>>>>> c18931cd379c94ab8ef653a2d07b3d6f15040e9e
+
